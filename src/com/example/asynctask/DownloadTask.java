@@ -31,7 +31,8 @@ public class DownloadTask extends AsyncTask<Integer, Integer, String> {
     
     /*
      * 执行时机：在onPreExecute 方法执行后马上执行，该方法运行在后台线程中
-     * 作用：主要负责执行那些很耗时的后台处理工作。可以调用 publishProgress方法来更新实时的任务进度。该方法是抽象方法，子类必须实现。
+     * 作用：主要负责执行那些很耗时的后台处理工作。可以调用 publishProgress方法来更新实时的任务进度。
+     * 该方法是抽象方法，子类必须实现。
      * @see android.os.AsyncTask#doInBackground(Params[])
      */
     @Override
@@ -39,6 +40,14 @@ public class DownloadTask extends AsyncTask<Integer, Integer, String> {
         // TODO Auto-generated method stub
         Log.d("sn", "1111111");
         for(int i=0;i<=100;i++){
+        	
+        	/*在 setProgress 的源码中，首先会判断当前线程是否为主UI线程，
+        	若是主UI线程则直接调用 doRefreshProgress 方法更新进度；
+        	若不是主UI线程则会先创建一个RefreshProgressRunnable 对象，
+        	然后调用 view 的 post(Runnable action) 方法，将 RefreshProgressRunnable 
+        	放到主UI线程的消息队列等待处理。所以更新进度的时候，在不在主线程调用setProgress 
+        	方法是没有影响的。同理，SeekBar、ProgressDialog 也是可以在子线程直接更新进度的。
+        	http://blog.csdn.net/androidzhaoxiaogang/article/details/8136222*/
             mProgressBar.setProgress(i);
             publishProgress(i);//在执行此方法的时候会直接调用onProgressUpdate(Params... values)
             try {
