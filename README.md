@@ -21,7 +21,9 @@ step2：实现以下几个方法：执行时机和作用看示例代码，以下
           
            onProgressUpdate(Params... values)：无返回值类型。参数：若无就传递Void；若有，就可用Progress，UI 线程将调用这个方法. 
           
-           onPostExecute(Result result) ：无返回值类型。参数：和Result保持一致。在doInBackground 执行完成后，将被UI 线程调用。 作用：后台的计算结果将通过该方法传递到UI 线程，并且在界面上展示给用户
+           onPostExecute(Result result) ：无返回值类型。参数：和Result保持一致。在doInBackground 执行完成后，将被UI 线程调用。 
+           
+           作用：后台的计算结果将通过该方法传递到UI 线程，并且在界面上展示给用户
 
 step3：在调用自定义的AsyncTask类中生成对象； 
           
